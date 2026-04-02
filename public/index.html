@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Private Mobile Chat</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div class="app">
+
+  <div class="header">
+    📱 Private Chat
+  </div>
+
+  <div class="register-box">
+    <input id="myMobile" placeholder="Enter Your Mobile Number" />
+    <button onclick="register()">Start Chat</button>
+  </div>
+
+  <div class="chat-box">
+    <div id="chatWindow" class="chat-window"></div>
+
+    <div class="controls">
+      <input id="toMobile" placeholder="Send to Mobile..." />
+      <input id="msg" placeholder="Type a message..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
