@@ -2,10 +2,15 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const path = require('path');
+const client = require('prom-client');
+
 
 const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
+const collectDefaultMetrics = client.collectDefaultMetrics;
+collectDefaultMetrics();
+
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -38,6 +43,10 @@ app.get('/health', (req, res) => {
   res.json({ status: 'UP' });
 });
 
+app.get('/metrics', async (req, res) => {
+  res.set('Content-Type', client.register.contentType);
+  res.end(await client.register.metrics());
+});
 server.listen(3000, () => {
   console.log('Server running on 3000');
 });
